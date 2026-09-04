@@ -6,80 +6,92 @@
   <title>Admin Dashboard — Kingdom</title>
   <link rel="stylesheet" href="../styles.css" />
   <link rel="stylesheet" href="admin.css" />
-  <style>
-    /* legacy inline styles removed; admin.css provides modern styling */
-  </style>
 </head>
 <body>
-  <main class="admin-main container">
-    <div class="admin-header"><div class="brand-title"><div class="brand-mark">KA</div><div><h1 style="margin:0">Admin Dashboard</h1><div class="small">Kingdom AutoMobile — Admin</div></div></div><div class="top-actions"><button id="theme-toggle" class="theme-toggle" title="Toggle theme"><span class="dot" aria-hidden="true"></span><span class="small">Theme</span></button> <a href="login.html" id="logout" class="btn secondary">Logout</a></div></div>
-    <div class="grid">
-      <div>
-        <section class="panel">
-          <h3>Create Vehicle (upload + generate)</h3>
-          <form id="create-vehicle" enctype="multipart/form-data">
-            <div><input name="current_password" placeholder="Your current admin password" type="password" required /></div>
-            <div><input name="id" placeholder="id (slug)" required /></div>
-            <div><input name="title" placeholder="Title" required /></div>
-            <div><input name="price" placeholder="Price (GH₵)" /></div>
-            <div><input name="year" placeholder="Year" /></div>
-            <div><input name="transmission" placeholder="Transmission" /></div>
-            <div><input name="fuel" placeholder="Fuel" /></div>
-            <div><input name="mileage" placeholder="Mileage" /></div>
-            <div><input name="vin" placeholder="VIN" /></div>
-            <div><textarea name="history" placeholder="History"></textarea></div>
-            <div><input name="files" type="file" id="create-files" multiple accept="image/*" /></div>
-            <div style="margin-top:.5rem"><button class="btn" type="submit">Create Vehicle</button></div>
-          </form>
-          <div id="create-res" style="margin-top:.5rem"></div>
-        </section>
-        <section class="panel">
-          <h2>Manage Vehicles</h2>
-          <p class="small">View, generate shell command for creating via generator, remove vehicles, or regenerate thumbnails.</p>
-          <ul id="vehicle-list" class="list"></ul>
-        </section>
-        <section class="panel">
-          <h3>Upload Images</h3>
-          <form id="upload-images">
-            <div><input name="id" placeholder="vehicle id (slug)" required /></div>
-            <div><input name="files" id="files" type="file" multiple accept="image/*" /></div>
-            <div style="margin-top:.5rem"><button class="btn" type="submit">Upload</button></div>
-          </form>
-          <div id="upload-res" style="margin-top:.5rem"></div>
-        </section>
-
-        <section class="panel">
-          <h2>Inquiries</h2>
-          <p class="small">Recent inquiries saved in this browser (demo).</p>
-          <ul id="inquiry-list" class="list"></ul>
-        </section>
+  <header class="admin-topbar">
+    <div class="container admin-nav">
+      <a href="../index.html" class="brand" aria-label="Kingdom home">
+        <span class="brand-mark">KA</span>
+        <span><b>Kingdom</b><small>AUTOMOBILE</small></span>
+      </a>
+      <nav class="admin-nav-links">
+        <a href="dashboard.html">Overview</a>
+        <a href="vehicles.html">Vehicles</a>
+        <a href="inquiries.html">Inquiries</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+      <div class="top-actions">
+        <button id="theme-toggle" class="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="small">Light</span>
+        </button>
+        <a href="login.html" id="logout" class="btn btn-ghost">Logout</a>
       </div>
-      <aside>
-        <section class="panel">
-          <h3>Add Vehicle (quick)</h3>
-          <form id="add-vehicle">
-            <div><input name="id" placeholder="id (slug)" required /></div>
-            <div><input name="title" placeholder="Title" required /></div>
-            <div><input name="price" placeholder="Price (GH₵)" required /></div>
-            <div><input name="year" placeholder="Year" /></div>
-            <div style="margin-top:.5rem"><button class="btn" type="submit">Create CLI Command</button></div>
-          </form>
-          <p style="font-size:.9rem">After creating, place images under <code>images/&lt;id&gt;/</code> and run the shown command in the repo root.</p>
-          <pre id="cli-cmd" style="background:#f6f8fa;padding:.5rem;border-radius:6px"></pre>
-        </section>
-        <section class="panel">
-          <h3>Rotate Admin Credentials</h3>
-          <form id="rotate-creds">
-            <div><input name="current" placeholder="Current password" type="password" required /></div>
-            <div><input name="username" placeholder="New username" required /></div>
-            <div><input name="password" placeholder="New password" type="password" required /></div>
-            <div style="margin-top:.5rem"><button class="btn" type="submit">Rotate</button></div>
-          </form>
-          <div id="rotate-result" style="margin-top:.5rem"></div>
-        </section>
-      </aside>
     </div>
+  </header>
+
+  <main class="container admin-main">
+    <section class="welcome-panel">
+      <div>
+        <p class="eyebrow dark">ADMIN PANEL</p>
+        <h1>Operations Dashboard</h1>
+      </div>
+      <div class="user-pill">Kingdom AutoMobile</div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card accent">
+        <span class="label">Vehicles</span>
+        <strong id="stat-vehicles">0</strong>
+        <small>Live inventory</small>
+      </article>
+      <article class="stat-card">
+        <span class="label">Inquiries</span>
+        <strong id="stat-inquiries">0</strong>
+        <small>Customer messages</small>
+      </article>
+      <article class="stat-card">
+        <span class="label">Uploads</span>
+        <strong>24</strong>
+        <small>Media library</small>
+      </article>
+      <article class="stat-card">
+        <span class="label">Status</span>
+        <strong>Online</strong>
+        <small>System healthy</small>
+      </article>
+    </section>
+
+    <section class="page-grid">
+      <article class="panel action-panel">
+        <div class="panel-head">
+          <h3>Inventory</h3>
+          <span class="panel-tag">Manage</span>
+        </div>
+        <p class="small">Add new vehicles, review stock, and refresh the generated dealer pages.</p>
+        <a href="vehicles.html" class="action-link">Open vehicle manager</a>
+      </article>
+
+      <article class="panel action-panel">
+        <div class="panel-head">
+          <h3>Inquiries</h3>
+          <span class="panel-tag">Customer</span>
+        </div>
+        <p class="small">Follow customer requests and keep track of active leads.</p>
+        <a href="inquiries.html" class="action-link">Review inquiries</a>
+      </article>
+
+      <article class="panel action-panel">
+        <div class="panel-head">
+          <h3>Settings</h3>
+          <span class="panel-tag">Security</span>
+        </div>
+        <p class="small">Rotate credentials and manage the admin operating setup.</p>
+        <a href="settings.html" class="action-link">Go to settings</a>
+      </article>
+    </section>
   </main>
+
   <script src="admin.js"></script>
 </body>
 </html>
