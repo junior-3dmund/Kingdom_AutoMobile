@@ -31,77 +31,103 @@
   </header>
 
   <main class="container admin-main">
-    <section class="page-header">
-      <div>
-        <p class="eyebrow dark">VEHICLE MANAGEMENT</p>
-        <h1>Inventory Control</h1>
-      </div>
-      <div class="user-pill">Live stock</div>
-    </section>
-
-    <div class="admin-grid">
-      <div class="stack">
-        <section class="panel">
-          <div class="panel-head">
-            <h3>Create Vehicle</h3>
-            <span class="panel-tag">Upload + Generate</span>
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <div class="side-brand">
+          <div class="brand-mark">KA</div>
+          <div>
+            <strong>Kingdom</strong>
+            <small>Admin</small>
           </div>
-          <form id="create-vehicle" class="admin-form" enctype="multipart/form-data">
-            <div><input name="current_password" placeholder="Your current admin password" type="password" required /></div>
-            <div><input name="id" placeholder="ID (slug)" required /></div>
-            <div><input name="title" placeholder="Title" required /></div>
-            <div><input name="price" placeholder="Price (GH₵)" /></div>
-            <div><input name="year" placeholder="Year" /></div>
-            <div><input name="transmission" placeholder="Transmission" /></div>
-            <div><input name="fuel" placeholder="Fuel" /></div>
-            <div><input name="mileage" placeholder="Mileage" /></div>
-            <div><input name="vin" placeholder="VIN" /></div>
-            <div><textarea name="history" placeholder="Vehicle history"></textarea></div>
-            <div><input name="files" type="file" id="create-files" multiple accept="image/*" /></div>
-            <div class="submit-row"><button class="btn btn-primary" type="submit">Create Vehicle</button></div>
-          </form>
-          <div id="create-res" class="response-box"></div>
-        </section>
+        </div>
 
-        <section class="panel">
-          <div class="panel-head">
-            <h3>Upload Images</h3>
-            <span class="panel-tag">Gallery</span>
-          </div>
-          <form id="upload-images" class="admin-form">
-            <div><input name="id" placeholder="Vehicle ID (slug)" required /></div>
-            <div><input name="files" id="files" type="file" multiple accept="image/*" /></div>
-            <div class="submit-row"><button class="btn btn-primary" type="submit">Upload</button></div>
-          </form>
-          <div id="upload-res" class="response-box"></div>
-        </section>
-      </div>
+        <nav class="side-nav">
+          <a href="dashboard.html">Overview</a>
+          <a class="active" href="vehicles.html">Vehicles</a>
+          <a href="inquiries.html">Inquiries</a>
+          <a href="settings.html">Settings</a>
+        </nav>
 
-      <aside class="stack">
-        <section class="panel">
-          <div class="panel-head">
-            <h3>Inventory</h3>
-            <span class="panel-tag">Manage</span>
-          </div>
-          <p class="small">Review each vehicle, regenerate thumbnails, or run remove actions.</p>
-          <ul id="vehicle-list" class="list"></ul>
-        </section>
-
-        <section class="panel">
-          <div class="panel-head">
-            <h3>Quick Add</h3>
-            <span class="panel-tag">CLI</span>
-          </div>
-          <form id="add-vehicle" class="admin-form">
-            <div><input name="id" placeholder="ID (slug)" required /></div>
-            <div><input name="title" placeholder="Title" required /></div>
-            <div><input name="price" placeholder="Price (GH₵)" required /></div>
-            <div><input name="year" placeholder="Year" /></div>
-            <div class="submit-row"><button class="btn btn-primary" type="submit">Create CLI Command</button></div>
-          </form>
-          <pre id="cli-cmd" class="code-box"></pre>
-        </section>
+        <div class="side-card">
+          <span class="label">Stock</span>
+          <strong id="stat-vehicles">0 live</strong>
+        </div>
       </aside>
+
+      <div class="admin-content">
+        <section class="page-header">
+          <div>
+            <p class="eyebrow dark">VEHICLE MANAGEMENT</p>
+            <h1>Inventory Control</h1>
+          </div>
+          <div class="user-pill">Live stock</div>
+        </section>
+
+        <div class="admin-grid">
+          <div class="stack">
+            <section class="panel">
+              <div class="panel-head">
+                <h3>Create Vehicle</h3>
+                <span class="panel-tag">Upload + Generate</span>
+              </div>
+              <form id="create-vehicle" class="admin-form" enctype="multipart/form-data">
+                <div><input name="current_password" placeholder="Your current admin password" type="password" required /></div>
+                <div><input name="id" placeholder="ID (slug)" required /></div>
+                <div><input name="title" placeholder="Title" required /></div>
+                <div><input name="price" placeholder="Price (GH₵)" /></div>
+                <div><input name="year" placeholder="Year" /></div>
+                <div><input name="transmission" placeholder="Transmission" /></div>
+                <div><input name="fuel" placeholder="Fuel" /></div>
+                <div><input name="mileage" placeholder="Mileage" /></div>
+                <div><input name="vin" placeholder="VIN" /></div>
+                <div><textarea name="history" placeholder="Vehicle history"></textarea></div>
+                <div><input name="files" type="file" id="create-files" multiple accept="image/*" /></div>
+                <div class="submit-row"><button class="btn btn-primary" type="submit">Create Vehicle</button></div>
+              </form>
+              <div id="create-res" class="response-box"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h3>Upload Images</h3>
+                <span class="panel-tag">Gallery</span>
+              </div>
+              <form id="upload-images" class="admin-form">
+                <div><input name="id" placeholder="Vehicle ID (slug)" required /></div>
+                <div><input name="files" id="files" type="file" multiple accept="image/*" /></div>
+                <div class="submit-row"><button class="btn btn-primary" type="submit">Upload</button></div>
+              </form>
+              <div id="upload-res" class="response-box"></div>
+            </section>
+          </div>
+
+          <aside class="stack">
+            <section class="panel">
+              <div class="panel-head">
+                <h3>Inventory</h3>
+                <span class="panel-tag">Manage</span>
+              </div>
+              <p class="small">Review each vehicle, regenerate thumbnails, or run remove actions.</p>
+              <ul id="vehicle-list" class="list"></ul>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h3>Quick Add</h3>
+                <span class="panel-tag">CLI</span>
+              </div>
+              <form id="add-vehicle" class="admin-form">
+                <div><input name="id" placeholder="ID (slug)" required /></div>
+                <div><input name="title" placeholder="Title" required /></div>
+                <div><input name="price" placeholder="Price (GH₵)" required /></div>
+                <div><input name="year" placeholder="Year" /></div>
+                <div class="submit-row"><button class="btn btn-primary" type="submit">Create CLI Command</button></div>
+              </form>
+              <pre id="cli-cmd" class="code-box"></pre>
+            </section>
+          </aside>
+        </div>
+      </div>
     </div>
   </main>
 

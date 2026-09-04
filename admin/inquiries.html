@@ -31,39 +31,65 @@
   </header>
 
   <main class="container admin-main">
-    <section class="page-header">
-      <div>
-        <p class="eyebrow dark">CUSTOMER LEADS</p>
-        <h1>Inquiries</h1>
-      </div>
-      <div class="user-pill">Follow-ups</div>
-    </section>
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <div class="side-brand">
+          <div class="brand-mark">KA</div>
+          <div>
+            <strong>Kingdom</strong>
+            <small>Admin</small>
+          </div>
+        </div>
 
-    <section class="stats-grid single-row">
-      <article class="stat-card accent">
-        <span class="label">Open</span>
-        <strong id="stat-inquiries">0</strong>
-        <small>Customer leads</small>
-      </article>
-      <article class="stat-card">
-        <span class="label">Response</span>
-        <strong>1h</strong>
-        <small>Target SLA</small>
-      </article>
-      <article class="stat-card">
-        <span class="label">Sales</span>
-        <strong>Live</strong>
-        <small>Deal pipeline</small>
-      </article>
-    </section>
+        <nav class="side-nav">
+          <a href="dashboard.html">Overview</a>
+          <a href="vehicles.html">Vehicles</a>
+          <a class="active" href="inquiries.html">Inquiries</a>
+          <a href="settings.html">Settings</a>
+        </nav>
 
-    <section class="panel">
-      <div class="panel-head">
-        <h3>Recent inquiries</h3>
-        <span class="panel-tag">Live</span>
+        <div class="side-card">
+          <span class="label">Leads</span>
+          <strong id="stat-inquiries">0 open</strong>
+        </div>
+      </aside>
+
+      <div class="admin-content">
+        <section class="page-header">
+          <div>
+            <p class="eyebrow dark">CUSTOMER LEADS</p>
+            <h1>Inquiries</h1>
+          </div>
+          <div class="user-pill">Follow-ups</div>
+        </section>
+
+        <section class="stats-grid single-row">
+          <article class="stat-card accent">
+            <span class="label">Open</span>
+            <strong id="stat-inquiries-total">0</strong>
+            <small>Customer leads</small>
+          </article>
+          <article class="stat-card">
+            <span class="label">Response</span>
+            <strong>1h</strong>
+            <small>Target SLA</small>
+          </article>
+          <article class="stat-card">
+            <span class="label">Sales</span>
+            <strong>Live</strong>
+            <small>Deal pipeline</small>
+          </article>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h3>Recent inquiries</h3>
+            <span class="panel-tag">Live</span>
+          </div>
+          <ul id="inquiry-list" class="list"></ul>
+        </section>
       </div>
-      <ul id="inquiry-list" class="list"></ul>
-    </section>
+    </div>
   </main>
 
   <script src="admin.js"></script>
