@@ -1,0 +1,32 @@
+/* Admin dashboard styles */
+:root{
+  --bg:#f4f7fb; --card:#ffffff; --muted:#6b7280; --accent:#0b63d6; --accent-2:#0366d6; --danger:#e55353;
+}
+html,body{height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#111827;background:var(--bg);margin:0}
+.admin-main{max-width:1200px;margin:2.4rem auto;padding:0 1rem}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.brand-title{display:flex;align-items:center;gap:.75rem}
+.brand-mark{background:linear-gradient(90deg,#0b63d6,#0366d6);color:#fff;padding:.45rem .6rem;border-radius:8px;font-weight:700}
+.top-actions a{color:var(--muted);text-decoration:none;padding:.35rem .6rem;border-radius:6px;background:transparent}
+.grid{display:grid;grid-template-columns:1fr 340px;gap:1rem}
+.panel{background:var(--card);padding:1.1rem;border-radius:12px;box-shadow:0 6px 18px rgba(17,24,39,0.06)}
+.panel h2,.panel h3{margin:0 0 .6rem 0;color:#0f172a}
+.list{list-style:none;padding:0;margin:0}
+.list li{display:flex;align-items:center;justify-content:space-between;padding:.6rem .4rem;border-radius:8px}
+.list li + li{margin-top:.45rem}
+.vehicle-info{flex:1}
+.vehicle-info strong{display:block;font-size:1rem}
+.vehicle-info small{color:var(--muted)}
+.actions{display:flex;gap:.4rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .7rem;border-radius:8px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-weight:600}
+.btn.secondary{background:#f3f4f6;color:#111827;border:1px solid #e6e9ee}
+.btn.ghost{background:transparent;color:var(--accent);border:1px dashed rgba(11,99,214,0.12)}
+form input, form textarea, form select{width:100%;padding:.6rem;border-radius:8px;border:1px solid #e6e9ee;margin-top:.45rem;background:#fff}
+form input[type=file]{padding:.25rem}
+pre#cli-cmd{white-space:pre-wrap}
+.panel .small{font-size:.9rem;color:var(--muted)}
+/* responsive */
+@media (max-width:880px){
+  .grid{grid-template-columns:1fr;}
+  .top-actions{display:none}
+}

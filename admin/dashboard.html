@@ -5,18 +5,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Admin Dashboard — Kingdom</title>
   <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="admin.css" />
   <style>
-    .admin-main{max-width:1100px;margin:2rem auto}
-    .panel{background:#fff;padding:1rem;border-radius:8px;margin-bottom:1rem}
-    .grid{display:grid;grid-template-columns:1fr 320px;gap:1rem}
-    .list {list-style:none;padding:0;margin:0}
-    .list li{padding:0.5rem 0;border-bottom:1px solid #eee}
-    .btn{display:inline-block;padding:0.4rem 0.6rem;border-radius:4px;background:#0366d6;color:#fff;text-decoration:none}
+    /* legacy inline styles removed; admin.css provides modern styling */
   </style>
 </head>
 <body>
   <main class="admin-main container">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem"><h1>Admin Dashboard</h1><div><a href="login.html" id="logout">Logout</a></div></div>
+    <div class="admin-header"><div class="brand-title"><div class="brand-mark">KA</div><div><h1 style="margin:0">Admin Dashboard</h1><div class="small">Kingdom AutoMobile — Admin</div></div></div><div class="top-actions"><a href="login.html" id="logout" class="btn secondary">Logout</a></div></div>
     <div class="grid">
       <div>
         <section class="panel">
@@ -39,7 +35,7 @@
         </section>
         <section class="panel">
           <h2>Manage Vehicles</h2>
-          <p>View, generate shell command for creating via generator, or remove vehicles.</p>
+          <p class="small">View, generate shell command for creating via generator, remove vehicles, or regenerate thumbnails.</p>
           <ul id="vehicle-list" class="list"></ul>
         </section>
         <section class="panel">
@@ -54,7 +50,7 @@
 
         <section class="panel">
           <h2>Inquiries</h2>
-          <p>Recent inquiries saved in this browser (demo).</p>
+          <p class="small">Recent inquiries saved in this browser (demo).</p>
           <ul id="inquiry-list" class="list"></ul>
         </section>
       </div>
