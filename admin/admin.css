@@ -906,6 +906,13 @@ body.dark .login-panel {
   color: var(--accent);
 }
 
+@media (min-width: 761px) and (max-width: 1100px) {
+  .admin-container { width: min(100% - 48px, 980px); }
+  .admin-sidebar { width: 220px; }
+  .admin-grid, .page-grid { gap: 1rem; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 900px) {
   .login-panel,
   .admin-grid,
