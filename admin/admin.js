@@ -41,6 +41,25 @@
     });
   }
 
+  function guessVehicleImage(href){
+    const slug = href
+      .replace(/^.*?vehicle-/, '')
+      .replace(/\.html$/, '')
+      .trim();
+
+    if (!slug || slug === '#' || slug === 'undefined') return '../images/placeholder-car.svg';
+
+    const candidates = [
+      `../images/${slug}/1.jpg`,
+      `../images/${slug}/thumb.jpg`,
+      `../images/${slug}/cover.jpg`,
+      `../images/${slug}/2.jpg`,
+      `../images/${slug}/main.jpg`
+    ];
+
+    return candidates[0];
+  }
+
   async function loadVehicles(){
     const list = document.getElementById('vehicle-list');
     const countEl = document.getElementById('stat-vehicles');
@@ -63,11 +82,15 @@
       cards.forEach(card => {
         const title = card.querySelector('.vehicle-info h3')?.textContent || 'Untitled';
         const link = card.querySelector('.view-details')?.getAttribute('href') || '#';
+        const imageSrc = guessVehicleImage(link);
         const item = document.createElement('li');
         item.innerHTML = `
-          <div>
-            <strong>${title}</strong><br />
-            <a href="${link}" target="_blank">${link}</a>
+          <div class="vehicle-list-row">
+            <img class="vehicle-thumbnail" src="${imageSrc}" alt="${title}" onerror="this.onerror=null;this.src='../images/placeholder-car.svg';" />
+            <div class="vehicle-list-meta">
+              <strong>${title}</strong>
+              <a href="${link}" target="_blank">Open page</a>
+            </div>
           </div>
           <div class="mini-actions">
             <button data-link="${link}" class="mini-btn del">Delete</button>

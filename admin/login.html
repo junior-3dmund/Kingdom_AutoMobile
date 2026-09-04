@@ -5,26 +5,67 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Admin Login — Kingdom</title>
   <link rel="stylesheet" href="../styles.css" />
-  <style>
-    .admin-card{max-width:420px;margin:6rem auto;padding:1.5rem;border-radius:8px;background:#fff}
-    .admin-card h2{margin:0 0 1rem}
-    .field{margin-bottom:0.75rem}
-    .error{color:#b00020}
-  </style>
+  <link rel="stylesheet" href="admin.css" />
 </head>
-<body>
-  <main>
-    <div class="admin-card container">
-      <h2>Admin Sign In</h2>
-      <form id="admin-login">
-        <div class="field"><label>Username<input id="username" name="username" required /></label></div>
-        <div class="field"><label>Password<input id="password" name="password" type="password" required /></label></div>
-        <div class="field"><button type="submit">Sign In</button></div>
-        <div id="msg" class="error" role="status" aria-live="polite"></div>
-      </form>
-      <p>Default demo credentials: <strong>admin / adminpass</strong></p>
+<body class="admin-auth-body">
+  <header class="admin-topbar">
+    <div class="container admin-nav">
+      <a href="../index.html" class="brand" aria-label="Kingdom home">
+        <span class="brand-mark">KA</span>
+        <span><b>Kingdom</b><small>AUTOMOBILE</small></span>
+      </a>
+      <nav class="admin-nav-links">
+        <a href="../index.html">Home</a>
+        <a href="../stock.html">Stock</a>
+        <a href="../about.html">About</a>
+        <a href="../how.html">How It Works</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="login-shell">
+    <div class="login-panel container">
+      <div class="login-hero">
+        <p class="eyebrow dark">ADMIN ACCESS</p>
+        <h1>Manage your inventory, uploads and customer inquiries.</h1>
+        <ul>
+          <li>Live vehicle updates</li>
+          <li>Secure uploads & thumbnails</li>
+          <li>Inquiry tracking and operations</li>
+        </ul>
+      </div>
+
+      <div class="admin-card">
+        <div class="card-header">
+          <h2>Sign In</h2>
+          <span>Portal</span>
+        </div>
+
+        <form id="admin-login" class="admin-form">
+          <div class="field">
+            <label for="username">Username</label>
+            <input id="username" name="username" required placeholder="Enter your username" />
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required placeholder="Enter your password" />
+          </div>
+
+          <div class="field inline-row">
+            <label class="checkbox-wrap"><input type="checkbox" id="show-password" /> Show password</label>
+            <a href="#" class="muted-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Sign In</button>
+          <div id="msg" class="error" role="status" aria-live="polite"></div>
+        </form>
+
+        <p class="demo-note">Demo credentials: <strong>Kingdom_AutoMobile</strong> / <strong>Kingdom@Auto26</strong></p>
+      </div>
     </div>
   </main>
+
   <script>
     async function loadCreds(){
       try{ const r = await fetch('creds.json'); return await r.json(); }catch(e){return null}
@@ -41,6 +82,11 @@
       return bufToHex(bits);
     }
 
+    document.getElementById('show-password').addEventListener('change', function(){
+      const input = document.getElementById('password');
+      input.type = this.checked ? 'text' : 'password';
+    });
+
     document.getElementById('admin-login').addEventListener('submit', async function(e){
       e.preventDefault();
       const u=document.getElementById('username').value.trim();
@@ -48,7 +94,6 @@
       const creds = await loadCreds();
       if (!creds){ document.getElementById('msg').textContent='Admin creds not found'; return }
 
-      // If creds contain a hash field, verify using PBKDF2; otherwise fallback to plaintext password field
       if (creds.hash){
         try{
           const derived = await derivePBKDF2(p, creds.salt, creds.iterations || 100000);
