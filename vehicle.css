@@ -14,7 +14,7 @@
 .inquiry{margin-top:16px}
 .inquiry button{background:#e5372a;color:#fff;border:0;padding:10px 14px;border-radius:6px}
 
-@media(max-width:900px){.vehicle-container{grid-template-columns:1fr;}.main-image{height:260px}}
+@media(min-width:761px) and (max-width:1100px){.vehicle-container{grid-template-columns:1fr 360px;gap:20px}.main-image{height:300px}.container{width:min(100% - 48px,980px)}}@media(max-width:900px){.vehicle-container{grid-template-columns:1fr;}.main-image{height:260px}}@media(max-width:560px){.vehicle-hero{padding:24px 0}.gallery,.details-card{padding:10px}.main-image{height:210px;font-size:22px}.thumbs{overflow-x:auto;padding-bottom:4px}.thumb{flex:0 0 72px}.specs{font-size:14px}.vehicle-meta dl{grid-template-columns:1fr;gap:2px}.inquiry button{width:100%;padding:12px}}
 
 .vehicle-meta{margin-top:12px;border-top:1px solid #eef2f4;padding-top:12px;color:#34414a}
 .vehicle-meta dl{display:grid;grid-template-columns:120px 1fr;gap:6px 12px}
