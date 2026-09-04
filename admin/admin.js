@@ -3,6 +3,26 @@
   if (!sessionStorage.getItem('adminAuth')){ window.location.href='login.html'; return }
   document.getElementById('logout').addEventListener('click', function(e){ e.preventDefault(); sessionStorage.removeItem('adminAuth'); sessionStorage.removeItem('adminUser'); window.location.href='login.html'; });
 
+  // Theme toggle (dark / light) persisted in localStorage
+  const themeToggle = document.getElementById('theme-toggle');
+  function applyTheme(t){
+    if (t === 'dark') document.body.classList.add('dark'); else document.body.classList.remove('dark');
+    if (themeToggle){
+      themeToggle.setAttribute('aria-pressed', t === 'dark');
+      themeToggle.querySelector('.small').textContent = t === 'dark' ? 'Dark' : 'Light';
+      themeToggle.querySelector('.dot').style.background = t === 'dark' ? 'var(--accent-2)' : 'var(--accent)';
+    }
+  }
+  const savedTheme = localStorage.getItem('adminTheme') || 'light';
+  applyTheme(savedTheme);
+  if (themeToggle){
+    themeToggle.addEventListener('click', function(){
+      const now = document.body.classList.contains('dark') ? 'light' : 'dark';
+      localStorage.setItem('adminTheme', now);
+      applyTheme(now);
+    });
+  }
+
   // Load vehicles by scraping stock.html's vehicle-grid
   async function loadVehicles(){
     try{

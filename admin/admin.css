@@ -2,12 +2,19 @@
 :root{
   --bg:#f4f7fb; --card:#ffffff; --muted:#6b7280; --accent:#0b63d6; --accent-2:#0366d6; --danger:#e55353;
 }
+/* Dark theme variables when body.dark is present */
+body.dark{
+  --bg:#0b1220; --card:#071021; --muted:#9aa4b2; --accent:#4ea1ff; --accent-2:#2f8ef6; --danger:#ff7b7b;
+  color: #e6eef9;
+}
 html,body{height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:#111827;background:var(--bg);margin:0}
 .admin-main{max-width:1200px;margin:2.4rem auto;padding:0 1rem}
 .admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
 .brand-title{display:flex;align-items:center;gap:.75rem}
 .brand-mark{background:linear-gradient(90deg,#0b63d6,#0366d6);color:#fff;padding:.45rem .6rem;border-radius:8px;font-weight:700}
 .top-actions a{color:var(--muted);text-decoration:none;padding:.35rem .6rem;border-radius:6px;background:transparent}
+.theme-toggle{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .5rem;border-radius:8px;border:1px solid rgba(17,24,39,0.06);background:transparent;color:var(--muted);cursor:pointer}
+.theme-toggle .dot{width:14px;height:14px;border-radius:50%;background:var(--accent);display:inline-block}
 .grid{display:grid;grid-template-columns:1fr 340px;gap:1rem}
 .panel{background:var(--card);padding:1.1rem;border-radius:12px;box-shadow:0 6px 18px rgba(17,24,39,0.06)}
 .panel h2,.panel h3{margin:0 0 .6rem 0;color:#0f172a}
