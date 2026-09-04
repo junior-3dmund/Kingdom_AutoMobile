@@ -127,7 +127,7 @@
           fd.append('sizes', sizes);
           fd.append('current_password', pwd);
 
-          const r = await fetch('http://127.0.0.1:5001/admin/regenerate_thumbs', { method: 'POST', body: fd });
+          const r = await fetch('/api/admin/regenerate_thumbs', { method: 'POST', body: fd });
           const j = await r.json();
 
           if (r.ok) {
@@ -359,7 +359,7 @@
 
       if (resEl) resEl.textContent = 'Rotating...';
       try {
-        const r = await fetch('http://127.0.0.1:5001/admin/rotate', {
+        const r = await fetch('/api/admin/rotate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ current_password: current, new_username: username, new_password: password })
@@ -396,7 +396,7 @@
       if (resEl) resEl.textContent = 'Uploading...';
 
       try {
-        const r = await fetch('http://127.0.0.1:5001/admin/upload', { method: 'POST', body: fd });
+        const r = await fetch('/api/admin/upload', { method: 'POST', body: fd });
         const j = await r.json();
         if (r.ok) {
           if (resEl) resEl.textContent = 'Uploaded: ' + (j.files || []).join(', ');
@@ -428,7 +428,7 @@
       if (resEl) resEl.textContent = 'Creating...';
 
       try {
-        const r = await fetch('http://127.0.0.1:5001/admin/create_vehicle', { method: 'POST', body: fd });
+        const r = await fetch('/api/admin/create_vehicle', { method: 'POST', body: fd });
         const j = await r.json();
         if (r.ok) {
           if (resEl) resEl.textContent = j.output || 'Created';
