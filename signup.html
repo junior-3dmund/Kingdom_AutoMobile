@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up — Kingdom AutoMobile</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="auth.css" />
+</head>
+<body>
+  <main class="auth-page">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <span class="brand-mark">KA</span>
+        <h1>Create Account</h1>
+      </div>
+      <form class="auth-form" id="signup-form">
+        <input type="text" name="first_name" placeholder="First name" aria-label="First name" />
+        <input type="text" name="middle_name" placeholder="Middle name (optional)" aria-label="Middle name (optional)" />
+        <input type="text" name="last_name" placeholder="Last name" aria-label="Last name" />
+        <input type="email" name="email" placeholder="Email address" aria-label="Email address" />
+        <input type="text" name="phone" placeholder="Phone number (e.g. +233...)" aria-label="Phone number" />
+        <div class="password-field">
+          <input type="password" name="password" placeholder="Password" aria-label="Password" />
+          <button type="button" class="toggle-password" data-target="password">Show</button>
+        </div>
+        <div class="password-field">
+          <input type="password" name="confirm_password" placeholder="Confirm password" aria-label="Confirm password" />
+          <button type="button" class="toggle-password" data-target="confirm_password">Show</button>
+        </div>
+        <div class="pw-hint">Password must be at least 8 characters and include an uppercase letter, a number, and a symbol.</div>
+        <button class="signup" type="submit">Create Account</button>
+      </form>
+
+      <div class="separator"><span>OR</span></div>
+
+      <div class="create-account">
+        <a href="login.html">Back to Log In</a>
+      </div>
+    <script src="auth.js"></script>
+    </div>
+  </main>
+</body>
+</html>

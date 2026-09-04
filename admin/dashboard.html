@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard — Kingdom</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .admin-main{max-width:1100px;margin:2rem auto}
+    .panel{background:#fff;padding:1rem;border-radius:8px;margin-bottom:1rem}
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:1rem}
+    .list {list-style:none;padding:0;margin:0}
+    .list li{padding:0.5rem 0;border-bottom:1px solid #eee}
+    .btn{display:inline-block;padding:0.4rem 0.6rem;border-radius:4px;background:#0366d6;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+  <main class="admin-main container">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem"><h1>Admin Dashboard</h1><div><a href="login.html" id="logout">Logout</a></div></div>
+    <div class="grid">
+      <div>
+        <section class="panel">
+          <h3>Create Vehicle (upload + generate)</h3>
+          <form id="create-vehicle" enctype="multipart/form-data">
+            <div><input name="current_password" placeholder="Your current admin password" type="password" required /></div>
+            <div><input name="id" placeholder="id (slug)" required /></div>
+            <div><input name="title" placeholder="Title" required /></div>
+            <div><input name="price" placeholder="Price (GH₵)" /></div>
+            <div><input name="year" placeholder="Year" /></div>
+            <div><input name="transmission" placeholder="Transmission" /></div>
+            <div><input name="fuel" placeholder="Fuel" /></div>
+            <div><input name="mileage" placeholder="Mileage" /></div>
+            <div><input name="vin" placeholder="VIN" /></div>
+            <div><textarea name="history" placeholder="History"></textarea></div>
+            <div><input name="files" type="file" id="create-files" multiple accept="image/*" /></div>
+            <div style="margin-top:.5rem"><button class="btn" type="submit">Create Vehicle</button></div>
+          </form>
+          <div id="create-res" style="margin-top:.5rem"></div>
+        </section>
+        <section class="panel">
+          <h2>Manage Vehicles</h2>
+          <p>View, generate shell command for creating via generator, or remove vehicles.</p>
+          <ul id="vehicle-list" class="list"></ul>
+        </section>
+        <section class="panel">
+          <h3>Upload Images</h3>
+          <form id="upload-images">
+            <div><input name="id" placeholder="vehicle id (slug)" required /></div>
+            <div><input name="files" id="files" type="file" multiple accept="image/*" /></div>
+            <div style="margin-top:.5rem"><button class="btn" type="submit">Upload</button></div>
+          </form>
+          <div id="upload-res" style="margin-top:.5rem"></div>
+        </section>
+
+        <section class="panel">
+          <h2>Inquiries</h2>
+          <p>Recent inquiries saved in this browser (demo).</p>
+          <ul id="inquiry-list" class="list"></ul>
+        </section>
+      </div>
+      <aside>
+        <section class="panel">
+          <h3>Add Vehicle (quick)</h3>
+          <form id="add-vehicle">
+            <div><input name="id" placeholder="id (slug)" required /></div>
+            <div><input name="title" placeholder="Title" required /></div>
+            <div><input name="price" placeholder="Price (GH₵)" required /></div>
+            <div><input name="year" placeholder="Year" /></div>
+            <div style="margin-top:.5rem"><button class="btn" type="submit">Create CLI Command</button></div>
+          </form>
+          <p style="font-size:.9rem">After creating, place images under <code>images/&lt;id&gt;/</code> and run the shown command in the repo root.</p>
+          <pre id="cli-cmd" style="background:#f6f8fa;padding:.5rem;border-radius:6px"></pre>
+        </section>
+        <section class="panel">
+          <h3>Rotate Admin Credentials</h3>
+          <form id="rotate-creds">
+            <div><input name="current" placeholder="Current password" type="password" required /></div>
+            <div><input name="username" placeholder="New username" required /></div>
+            <div><input name="password" placeholder="New password" type="password" required /></div>
+            <div style="margin-top:.5rem"><button class="btn" type="submit">Rotate</button></div>
+          </form>
+          <div id="rotate-result" style="margin-top:.5rem"></div>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vehicle Details — Kingdom AutoMobile</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="vehicle.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></a>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+    <nav>
+      <a href="index.html">Home</a><a href="stock.html">Stock</a><a href="how.html">How to Buy</a>
+      <a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      <a class="login" href="login.html">Login</a><a class="signup" href="signup.html">Sign Up</a>
+    </nav>
+  </div>
+</header>
+
+<main class="vehicle-hero container">
+  <div class="vehicle-container">
+    <div>
+      <div class="gallery">
+        <div id="mainImage" class="main-image">Image</div>
+        <div id="thumbs" class="thumbs"></div>
+      </div>
+      <div id="description" class="description"></div>
+    </div>
+
+    <aside class="details-card">
+      <h2 id="title">Vehicle Title</h2>
+      <div id="price" class="price" style="font-size:20px;font-weight:bold;color:#1c2b33"></div>
+      <div class="specs">
+        <div><b id="year">Year</b><small id="transmission"></small></div>
+        <div><b id="fuel">Fuel</b><small id="mileage"></small></div>
+      </div>
+      <div id="extraDetails"></div>
+      <div class="inquiry"><button id="inquireBtn">Send Inquiry</button></div>
+    </aside>
+  </div>
+</main>
+
+<footer><div class="container footer"><div class="brand"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></div><p>© 2026 Kingdom AutoMobile Dealership. All rights reserved.</p></div></footer>
+
+<script>
+// Simple data for demo vehicles
+const VEHICLES = {
+  'land-cruiser':{
+    title:'Toyota Land Cruiser',
+    price:'GH₵48,500',
+    year:'2021',
+    transmission:'Automatic',
+    fuel:'Petrol',
+    mileage:'45,000 km',
+    description:'A reliable off-road SUV with comfortable seating and powerful performance.',
+    images:['TOYOTA LAND CRUISER','TOYOTA LAND CRUISER - 2','TOYOTA LAND CRUISER - 3']
+  },
+  'honda-crv':{
+    title:'Honda CR-V',
+    price:'GH₵23,900',
+    year:'2020',
+    transmission:'Automatic',
+    fuel:'Petrol',
+    mileage:'60,000 km',
+    description:'Compact SUV with great fuel economy and cargo space.',
+    images:['HONDA CR-V','HONDA CR-V - 2','HONDA CR-V - 3']
+  },
+  'hyundai-tucson':{
+    title:'Hyundai Tucson',
+    price:'GH₵29,800',
+    year:'2022',
+    transmission:'Automatic',
+    fuel:'Petrol',
+    mileage:'30,000 km',
+    description:'Modern crossover with up-to-date features and safety.',
+    images:['HYUNDAI TUCSON','HYUNDAI TUCSON - 2','HYUNDAI TUCSON - 3']
+  }
+};
+
+function qs(name){
+  return new URLSearchParams(location.search).get(name);
+}
+
+function renderVehicle(id){
+  const v = VEHICLES[id];
+  if(!v){ document.getElementById('title').textContent='Vehicle not found'; return; }
+  document.getElementById('title').textContent = v.title;
+  document.getElementById('price').textContent = v.price;
+  document.getElementById('year').textContent = v.year;
+  document.getElementById('transmission').textContent = v.transmission;
+  document.getElementById('fuel').textContent = v.fuel;
+  document.getElementById('mileage').textContent = v.mileage;
+  document.getElementById('description').textContent = v.description;
+
+  const main = document.getElementById('mainImage');
+  const thumbs = document.getElementById('thumbs');
+  thumbs.innerHTML='';
+  v.images.forEach((txt, idx)=>{
+    const t = document.createElement('div'); t.className='thumb'; t.textContent = txt; t.addEventListener('click', ()=>{
+      main.textContent = txt; document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active')); t.classList.add('active');
+    });
+    if(idx===0){ t.classList.add('active'); main.textContent = txt; }
+    thumbs.appendChild(t);
+  });
+
+  const extra = document.getElementById('extraDetails');
+  extra.innerHTML = `<p><b>Mileage:</b> ${v.mileage}</p><p><b>Transmission:</b> ${v.transmission}</p><p><b>Fuel:</b> ${v.fuel}</p>`;
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  const id = qs('id');
+  renderVehicle(id);
+  // reuse menu script behavior
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav');
+  if (menuBtn && nav){ menuBtn.addEventListener('click', ()=>nav.classList.toggle('show')); nav.querySelectorAll('a').forEach(link=>link.addEventListener('click', ()=>nav.classList.remove('show'))); }
+  const inquire = document.getElementById('inquireBtn');
+  if(inquire) inquire.addEventListener('click', ()=> alert('Inquiry sent (demo). Our team will contact you.'));
+});
+</script>
+</body>
+</html>

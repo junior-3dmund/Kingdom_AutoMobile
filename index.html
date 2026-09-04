@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kingdom AutoMobile Dealership</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="#"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></a>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+    <nav>
+      <a href="index.html">Home</a><a href="stock.html">Stock</a><a href="how.html">How to Buy</a>
+      <a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      <a class="login" href="login.html">Login</a><a class="signup" href="signup.html">Sign Up</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+<section class="hero">
+  <div class="container hero-content">
+    <p class="eyebrow">QUALITY VEHICLES • TRUSTED SERVICE</p>
+    <h1>Find Your Next <span>Perfect Car</span></h1>
+    <p class="hero-copy">Browse quality vehicles and find the one that fits your lifestyle and budget.</p>
+    <div class="search-card">
+      <div class="tabs"><button class="active">Search Vehicles</button><button>Advanced Search</button></div>
+      <div class="filters">
+        <select><option>All Makes</option><option>Toyota</option><option>Honda</option><option>Nissan</option><option>Hyundai</option></select>
+        <select><option>All Models</option></select>
+        <select><option>Min Year</option><option>2026</option><option>2025</option><option>2024</option><option>2023</option></select>
+        <select><option>Max Price</option><option>GH₵10,000</option><option>GH₵20,000</option><option>GH₵30,000</option></select>
+        <button class="search-btn">Search Cars →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quick container">
+  <div><strong>Easy Search</strong><span>Find cars by make, model and budget</span></div>
+  <div><strong>Quality Vehicles</strong><span>Clear details and vehicle information</span></div>
+  <div><strong>Trusted Support</strong><span>We're here throughout your journey</span></div>
+</section>
+
+<!-- Stock moved to stock.html -->
+<!-- Stock preview (auto-inserted) -->
+<section class="section container">
+  <div class="vehicle-grid">
+      <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">TEST<br><small>Car</small></div></div>
+      <div class="vehicle-info"><h3>Test Car</h3><p>2020 •  • </p><div class="price">GH₵1,234 <a class="view-details" href="vehicle-test-create.html">View Details</a></div></div>
+      </article>
+    </div>
+</section>
+
+<!-- Stock preview (auto-inserted) -->
+<section class="section container">
+  <div class="vehicle-grid">
+      <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">ADMIN<br><small>Test</small></div></div>
+      <div class="vehicle-info"><h3>Admin Test Car</h3><p>2020 • Automatic • Petrol</p><div class="price">GH₵9,999 <a class="view-details" href="vehicle-testadmin.html">View Details</a></div></div>
+      </article>
+    </div>
+</section>
+
+<!-- Stock preview (auto-inserted) -->
+<section class="section container">
+  <div class="vehicle-grid">
+      <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">TOP<br><small>Insert</small></div></div>
+      <div class="vehicle-info"><h3>Top Insert Car</h3><p>2018 • Automatic • Petrol</p><div class="price">GH₵5,000 <a class="view-details" href="vehicle-testtop.html">View Details</a></div></div>
+      </article>
+    </div>
+</section>
+
+
+<section class="browse">
+ <div class="container">
+  <div class="section-heading"><div><p class="eyebrow dark">BROWSE YOUR WAY</p><h2>Find by Popular Make</h2></div></div>
+  <div class="make-grid"><button>Toyota</button><button>Honda</button><button>Nissan</button><button>Hyundai</button><button>BMW</button><button>Mercedes-Benz</button></div>
+ </div>
+</section>
+
+<!-- 'How', 'About', and 'Contact' moved to separate pages -->
+</main>
+
+<footer><div class="container footer"><div class="brand"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></div><p>© 2026 Kingdom AutoMobile Dealership. All rights reserved.</p></div></footer>
+<script>
+(function(){
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav');
+  if (!menuBtn || !nav) return;
+  menuBtn.addEventListener('click', () => nav.classList.toggle('show'));
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('show')));
+})();
+</script>
+</body>
+</html>

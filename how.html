@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Buy — Kingdom AutoMobile</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></a>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+    <nav>
+      <a href="index.html">Home</a><a href="stock.html">Stock</a><a href="how.html">How to Buy</a>
+      <a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      <a class="login" href="login.html">Login</a><a class="signup" href="signup.html">Sign Up</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section container how">
+ <section class="section container">
+  <div><p class="eyebrow dark">SIMPLE PROCESS</p><h2>How It Works</h2><p>Finding your next vehicle should be simple. Search our stock, choose a vehicle, and send us an inquiry.</p></div>
+  <div class="steps"><div><b>01</b><h3>Search</h3><p>Browse available vehicles using smart filters.</p></div><div><b>02</b><h3>Choose</h3><p>Review photos, specifications and pricing.</p></div><div><b>03</b><h3>Contact</h3><p>Send an inquiry and get assistance from our team.</p></div></div>
+ </section>
+</main>
+
+<footer><div class="container footer"><div class="brand"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></div><p>© 2026 Kingdom AutoMobile Dealership. All rights reserved.</p></div></footer>
+<script>
+(function(){
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav');
+  if (!menuBtn || !nav) return;
+  menuBtn.addEventListener('click', () => nav.classList.toggle('show'));
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('show')));
+})();
+</script>
+</body>
+</html>

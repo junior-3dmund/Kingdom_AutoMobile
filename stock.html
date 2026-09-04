@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stock — Kingdom AutoMobile</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></a>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+    <nav>
+      <a href="index.html">Home</a><a href="stock.html">Stock</a><a href="how.html">How to Buy</a>
+      <a href="about.html">About Us</a><a href="contact.html">Contact</a>
+      <a class="login" href="login.html">Login</a><a class="signup" href="signup.html">Sign Up</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section container">
+  <section id="stock" class="section container">
+    <div class="section-heading"><div><p class="eyebrow dark">EXPLORE OUR INVENTORY</p><h2>Featured Vehicles</h2></div><a href="stock.html" class="view-all">View All Stock →</a></div>
+    <div class="vehicle-grid">
+      <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">TEST<br><small>Car</small></div></div>
+      <div class="vehicle-info"><h3>Test Car</h3><p>2020 •  • </p><div class="price">GH₵1,234 <a class="view-details" href="vehicle-test-create.html">View Details</a></div></div>
+      </article>
+  
+      <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">ADMIN<br><small>Test</small></div></div>
+      <div class="vehicle-info"><h3>Admin Test Car</h3><p>2020 • Automatic • Petrol</p><div class="price">GH₵9,999 <a class="view-details" href="vehicle-testadmin.html">View Details</a></div></div>
+      </article>
+  
+      <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">TOP<br><small>Insert</small></div></div>
+      <div class="vehicle-info"><h3>Top Insert Car</h3><p>2018 • Automatic • Petrol</p><div class="price">GH₵5,000 <a class="view-details" href="vehicle-testtop.html">View Details</a></div></div>
+      </article>
+  
+      <article class="vehicle-card">
+        <div class="vehicle-img"><span class="tag">Featured</span><div class="car-placeholder">TOYOTA<br><small>LAND CRUISER</small></div></div>
+        <div class="vehicle-info"><h3>Toyota Land Cruiser</h3><p>2021 • Automatic • Petrol</p><div class="price">GH₵48,500 <a class="view-details" href="vehicle-land-cruiser.html">View Details</a></div></div>
+      </article>
+      <article class="vehicle-card">
+        <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">HONDA<br><small>CR-V</small></div></div>
+        <div class="vehicle-info"><h3>Honda CR-V</h3><p>2020 • Automatic • Petrol</p><div class="price">GH₵23,900 <a class="view-details" href="vehicle-honda-crv.html">View Details</a></div></div>
+      </article>
+      <article class="vehicle-card">
+        <div class="vehicle-img"><span class="tag">Featured</span><div class="car-placeholder">HYUNDAI<br><small>TUCSON</small></div></div>
+        <div class="vehicle-info"><h3>Hyundai Tucson</h3><p>2022 • Automatic • Petrol</p><div class="price">GH₵29,800 <a class="view-details" href="vehicle-hyundai-tucson.html">View Details</a></div></div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer><div class="container footer"><div class="brand"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></div><p>© 2026 Kingdom AutoMobile Dealership. All rights reserved.</p></div></footer>
+<script>
+(function(){
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav');
+  if (!menuBtn || !nav) return;
+  menuBtn.addEventListener('click', () => nav.classList.toggle('show'));
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('show')));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* Vehicle detail page styles */
+.vehicle-hero{padding:40px 0}
+.vehicle-container{display:grid;grid-template-columns:1fr 420px;gap:30px;align-items:start}
+.gallery{background:#fff;border:1px solid #e6e7e8;border-radius:8px;padding:12px}
+.main-image{height:360px;background:#e7eaed;display:grid;place-items:center;font-size:28px;color:#394651;border-radius:6px}
+.thumbs{display:flex;gap:10px;margin-top:12px}
+.thumb{width:80px;height:60px;background:#f0f2f3;display:grid;place-items:center;border-radius:6px;cursor:pointer;border:2px solid transparent}
+.thumb.active{border-color:#e5372a}
+.details-card{background:#fff;border:1px solid #e6e7e8;border-radius:8px;padding:16px}
+.details-card h2{margin:0 0 8px}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.specs b{display:block}
+.description{margin-top:12px;color:#55656f}
+.inquiry{margin-top:16px}
+.inquiry button{background:#e5372a;color:#fff;border:0;padding:10px 14px;border-radius:6px}
+
+@media(max-width:900px){.vehicle-container{grid-template-columns:1fr;}.main-image{height:260px}}
+
+.vehicle-meta{margin-top:12px;border-top:1px solid #eef2f4;padding-top:12px;color:#34414a}
+.vehicle-meta dl{display:grid;grid-template-columns:120px 1fr;gap:6px 12px}
+.vehicle-meta dt{font-weight:700;color:#26313b}
+.vehicle-history{margin-top:10px;background:#fbfdfe;border:1px solid #eef4f6;padding:12px;border-radius:6px;color:#55656f}
