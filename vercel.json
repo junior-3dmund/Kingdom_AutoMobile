@@ -3,5 +3,23 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "framework": null,
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "functions": {
+    "api/admin.py": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/api/admin/:path*", "destination": "/api/admin" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000" }
+      ]
+    }
+  ]
 }
