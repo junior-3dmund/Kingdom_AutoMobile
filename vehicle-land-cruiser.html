@@ -58,6 +58,9 @@
 
 <footer><div class="container footer"><div class="brand"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></div><p>© 2026 Kingdom AutoMobile Dealership. All rights reserved.</p></div></footer>
 
+<script>window.__KINGDOM_SUPABASE_CONFIG__ = { url: 'https://YOUR_PROJECT_REF.supabase.co', anonKey: 'YOUR_SUPABASE_ANON_KEY' };</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function(){
   document.querySelectorAll('.thumb').forEach(t=>t.addEventListener('click', ()=>{ document.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active')); t.classList.add('active'); document.getElementById('mainImage').innerHTML = t.innerHTML;}));
@@ -66,14 +69,17 @@ document.addEventListener('DOMContentLoaded', function(){
   if (menuBtn && nav){ menuBtn.addEventListener('click', ()=>nav.classList.toggle('show')); nav.querySelectorAll('a').forEach(link=>link.addEventListener('click', ()=>nav.classList.remove('show'))); }
   const inquire = document.getElementById('inquireBtn');
   if(inquire){
-    inquire.addEventListener('click', function(){
+    inquire.addEventListener('click', async function(){
       try{
         const name = prompt('Your name (optional)') || '';
         const contact = prompt('Your email or phone') || '';
         const message = prompt('Message') || '';
         const rec = { vehicle: 'Toyota Land Cruiser', id: 'land-cruiser', name, contact, message, ts: Date.now() };
-        const list = JSON.parse(localStorage.getItem('inquiries')||'[]');
-        list.push(rec); localStorage.setItem('inquiries', JSON.stringify(list));
+        const result = await window.KingdomSupabase?.saveInquiry?.(rec);
+        if (result && result.source) {
+          alert('Inquiry saved to ' + result.source + '.');
+          return;
+        }
         alert('Inquiry saved (demo).');
       }catch(e){ alert('Inquiry saved (demo).') }
     });

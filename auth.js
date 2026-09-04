@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
+  const supabaseApi = window.KingdomSupabase;
+
   function isEmail(v){return /\S+@\S+\.\S+/.test(v)}
   function isPhone(v){return /^\+?\d{7,15}$/.test(v.replace(/\s+/g,''))}
   function validContact(v){return isEmail(v) || isPhone(v)}
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     [first,middle,last,email,phone,password,confirm].forEach(i=>i&&i.addEventListener('input', ()=>clearError(i)));
 
-    signupForm.addEventListener('submit', function(e){
+    signupForm.addEventListener('submit', async function(e){
       e.preventDefault();
       let ok = true;
       if(!first.value.trim()){ showError(first,'Enter your first name'); ok=false }
@@ -40,6 +42,30 @@ document.addEventListener('DOMContentLoaded', function(){
       if(!isStrongPassword(password.value)){ showError(password,'Password must be at least 8 characters and include an uppercase letter, a number, and a symbol'); ok=false }
       if(password.value !== confirm.value){ showError(confirm,'Passwords do not match'); ok=false }
       if(!ok) return;
+
+      if (supabaseApi && supabaseApi.isConfigured) {
+        const { error } = await supabaseApi.signUpCustomer({
+          email: email.value.trim(),
+          password: password.value,
+          metadata: {
+            first_name: first.value.trim(),
+            middle_name: (middle && middle.value.trim()) || '',
+            last_name: last.value.trim(),
+            phone: phone.value.trim(),
+            source: 'kingdom-automobile'
+          }
+        });
+
+        if (error) {
+          showError(email, error.message || 'Unable to create account.');
+          return;
+        }
+
+        alert('Account created. Check your email to verify your account, then sign in.');
+        window.location.href = 'login.html';
+        return;
+      }
+
       alert('Account created. Redirecting to login.');
       window.location.href = 'login.html';
     });
@@ -67,13 +93,29 @@ document.addEventListener('DOMContentLoaded', function(){
     const contact = loginForm.querySelector('input[name="contact"]');
     const password = loginForm.querySelector('input[name="password"]');
     [contact,password].forEach(i=>i&&i.addEventListener('input', ()=>clearError(i)));
-    loginForm.addEventListener('submit', function(e){
+    loginForm.addEventListener('submit', async function(e){
       e.preventDefault();
       let ok = true;
       if(!validContact(contact.value.trim())){ showError(contact,'Enter a valid email or phone number'); ok=false }
       if(password.value.trim().length === 0){ showError(password,'Enter your password'); ok=false }
       if(!ok) return;
-      // Placeholder: perform real authentication here
+
+      if (supabaseApi && supabaseApi.isConfigured) {
+        const { error } = await supabaseApi.signInCustomer({
+          contact: contact.value.trim(),
+          password: password.value
+        });
+
+        if (error) {
+          showError(contact, error.message || 'Unable to sign in.');
+          return;
+        }
+
+        alert('Logged in successfully. Redirecting to home.');
+        window.location.href = 'index.html';
+        return;
+      }
+
       alert('Logged in successfully (demo). Redirecting to home.');
       window.location.href = 'index.html';
     });

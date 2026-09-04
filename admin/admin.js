@@ -158,12 +158,101 @@
     if (el) el.textContent = 'python tools/remove_vehicle.py --id ' + id;
   }
 
-  function loadInquiries(){
+  async function readInquiries(){
+    const supabaseApi = window.KingdomSupabase;
+    if (supabaseApi && supabaseApi.isConfigured) {
+      try {
+        const rows = await supabaseApi.loadInquiries();
+        if (Array.isArray(rows)) return rows;
+      } catch (error) {
+        console.warn('Supabase inquiry fetch failed:', error);
+      }
+    }
+
+    try {
+      return JSON.parse(localStorage.getItem('inquiries') || '[]');
+    } catch (error) {
+      return [];
+    }
+  }
+
+  async function saveInquiries(arr){
+    const supabaseApi = window.KingdomSupabase;
+    if (supabaseApi && supabaseApi.isConfigured) {
+      await supabaseApi.syncInquiryList(arr);
+      return;
+    }
+
+    localStorage.setItem('inquiries', JSON.stringify(arr));
+  }
+
+  function buildReplyBody(item, message){
+    const name = item.name || 'Customer';
+    const vehicle = item.vehicle || 'your selected vehicle';
+    const channel = (item.contact || '').trim();
+    return {
+      subject: 'Re: Your inquiry about ' + vehicle,
+      body: `Hello ${name},\n\nThank you for your interest in ${vehicle}.\n\n${message}\n\nKind regards,\nKingdom AutoMobile\nwww.kingdomautomobile.com`,
+      mailto: channel.includes('@')
+        ? `mailto:${channel}?subject=${encodeURIComponent('Re: Your inquiry about ' + vehicle)}&body=${encodeURIComponent(`Hello ${name},\n\nThank you for your interest in ${vehicle}.\n\n${message}\n\nKind regards,\nKingdom AutoMobile\nwww.kingdomautomobile.com`)}`
+        : '',
+      sms: channel && !channel.includes('@')
+        ? `sms:${channel.replace(/\D/g, '')}`
+        : ''
+    };
+  }
+
+  function normalizeMessageThread(item){
+    const initial = item.message || '';
+    const history = Array.isArray(item.history) ? item.history : [];
+    if (!history.length && initial) {
+      return [{ role: 'customer', text: initial, ts: item.ts || Date.now() }];
+    }
+    return history;
+  }
+
+  async function sendReply(item, message){
+    const trimmed = (message || '').trim();
+    if (!trimmed) {
+      alert('Write a reply before sending it.');
+      return;
+    }
+
+    const arr = await readInquiries();
+    const updated = arr.map(entry => {
+      const match = entry.ts === item.ts && entry.contact === item.contact && entry.name === item.name && entry.vehicle === item.vehicle;
+      if (!match) return entry;
+
+      const history = normalizeMessageThread(entry);
+      history.push({ role: 'admin', text: trimmed, ts: Date.now() });
+
+      return {
+        ...entry,
+        reply: trimmed,
+        status: 'sent',
+        replySentAt: new Date().toISOString(),
+        history
+      };
+    });
+    await saveInquiries(updated);
+
+    const { mailto, sms } = buildReplyBody(item, trimmed);
+    const target = item.contact && item.contact.includes('@') ? mailto : sms;
+
+    if (target) {
+      window.location.href = target;
+    }
+
+    await loadInquiries();
+    alert('Customer reply saved and marked as sent.');
+  }
+
+  async function loadInquiries(){
     const ul = document.getElementById('inquiry-list');
     const countEl = document.getElementById('stat-inquiries');
     if (!ul) return;
 
-    const arr = JSON.parse(localStorage.getItem('inquiries') || '[]').slice().reverse();
+    const arr = (await readInquiries()).slice().reverse();
     if (countEl) countEl.textContent = String(arr.length);
     ul.innerHTML = '';
 
@@ -174,14 +263,65 @@
 
     arr.forEach(item => {
       const li = document.createElement('li');
+      const contact = item.contact || 'No contact';
+      const vehicle = item.vehicle || 'Vehicle inquiry';
+      const thread = normalizeMessageThread(item);
+      const status = item.status === 'sent' || item.reply ? 'Sent' : 'Pending';
+      const replyText = item.reply || 'Thank you for your interest in ' + vehicle + '. We would be happy to help with this vehicle.';
+
+      const threadHtml = thread.map(entry => `
+        <div class="thread-entry ${entry.role === 'admin' ? 'admin' : 'customer'}">
+          <strong>${entry.role === 'admin' ? 'Kingdom' : (item.name || 'Customer')}</strong>
+          <p>${(entry.text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+          <small>${new Date(entry.ts).toLocaleString()}</small>
+        </div>
+      `).join('');
+
       li.innerHTML = `
-        <div>
-          <strong>${item.name || 'Unknown'}</strong><br />
-          <small>${item.contact || 'No contact'} • ${item.vehicle || ''}</small>
+        <div class="inquiry-header">
+          <div>
+            <strong>${item.name || 'Unknown'}</strong><br />
+            <small>${contact} • ${vehicle}</small>
+          </div>
+          <span class="status-badge ${status === 'Sent' ? 'sent' : 'pending'}">${status}</span>
         </div>
         <div class="inquiry-message">${item.message || ''}</div>
+        <div class="thread">
+          ${threadHtml}
+        </div>
         <small>${new Date(item.ts).toLocaleString()}</small>
+        <div class="inquiry-panel">
+          <div class="reply-box ${item.reply ? 'open' : ''}">
+            <textarea class="reply-text">${replyText}</textarea>
+            <div class="reply-actions">
+              <button type="button" class="send-reply-btn">Send reply</button>
+              <button type="button" class="close-reply-btn">Close</button>
+            </div>
+          </div>
+          <div class="reply-actions">
+            <button type="button" class="reply-btn">Reply</button>
+          </div>
+        </div>
       `;
+
+      const replyBox = li.querySelector('.reply-box');
+      const replyBtn = li.querySelector('.reply-btn');
+      const closeBtn = li.querySelector('.close-reply-btn');
+      const sendBtn = li.querySelector('.send-reply-btn');
+      const textarea = li.querySelector('.reply-text');
+
+      replyBtn.addEventListener('click', () => {
+        replyBox.classList.toggle('open');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        replyBox.classList.remove('open');
+      });
+
+      sendBtn.addEventListener('click', () => {
+        sendReply(item, textarea.value);
+      });
+
       ul.appendChild(li);
     });
   }

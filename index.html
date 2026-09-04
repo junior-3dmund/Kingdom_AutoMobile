@@ -4,12 +4,25 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Kingdom AutoMobile Dealership</title>
+<meta name="description" content="Kingdom AutoMobile offers premium vehicles with trusted service and transparent buying support." />
+<meta property="og:title" content="Kingdom AutoMobile Dealership" />
+<meta property="og:description" content="Premium vehicles, trusted service, and a smooth buying experience." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="images/logo-social.svg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Kingdom AutoMobile Dealership" />
+<meta name="twitter:description" content="Premium vehicles, trusted service, and a smooth buying experience." />
+<meta name="twitter:image" content="images/logo-social.svg" />
+<link rel="icon" href="images/logo-favicon.svg" type="image/svg+xml" />
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <header class="topbar">
   <div class="container nav">
-    <a class="brand" href="#"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></a>
+    <a class="brand" href="index.html" aria-label="Kingdom AutoMobile home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span>
+    </a>
     <button class="menu-btn" aria-label="Open menu">☰</button>
     <nav>
       <a href="index.html">Home</a><a href="stock.html">Stock</a><a href="how.html">How to Buy</a>
@@ -45,34 +58,30 @@
 </section>
 
 <!-- Stock moved to stock.html -->
-<!-- Stock preview (auto-inserted) -->
 <section class="section container">
-  <div class="vehicle-grid">
-      <article class="vehicle-card">
-      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">TEST<br><small>Car</small></div></div>
-      <div class="vehicle-info"><h3>Test Car</h3><p>2020 •  • </p><div class="price">GH₵1,234 <a class="view-details" href="vehicle-test-create.html">View Details</a></div></div>
-      </article>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow dark">FEATURED STOCK</p>
+      <h2>Handpicked Cars for Today</h2>
     </div>
-</section>
+    <a href="stock.html" class="view-all">View all stock →</a>
+  </div>
+  <div class="vehicle-grid">
+    <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">Featured</span><div class="car-placeholder">TOYOTA<br><small>LAND CRUISER</small></div></div>
+      <div class="vehicle-info"><h3>Toyota Land Cruiser</h3><p>2021 • Automatic • Petrol</p><div class="price">GH₵48,500 <a class="view-details" href="vehicle-land-cruiser.html">View Details</a></div></div>
+    </article>
 
-<!-- Stock preview (auto-inserted) -->
-<section class="section container">
-  <div class="vehicle-grid">
-      <article class="vehicle-card">
-      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">ADMIN<br><small>Test</small></div></div>
-      <div class="vehicle-info"><h3>Admin Test Car</h3><p>2020 • Automatic • Petrol</p><div class="price">GH₵9,999 <a class="view-details" href="vehicle-testadmin.html">View Details</a></div></div>
-      </article>
-    </div>
-</section>
+    <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">HONDA<br><small>CR-V</small></div></div>
+      <div class="vehicle-info"><h3>Honda CR-V</h3><p>2020 • Automatic • Petrol</p><div class="price">GH₵23,900 <a class="view-details" href="vehicle-honda-crv.html">View Details</a></div></div>
+    </article>
 
-<!-- Stock preview (auto-inserted) -->
-<section class="section container">
-  <div class="vehicle-grid">
-      <article class="vehicle-card">
-      <div class="vehicle-img"><span class="tag">Available</span><div class="car-placeholder">TOP<br><small>Insert</small></div></div>
-      <div class="vehicle-info"><h3>Top Insert Car</h3><p>2018 • Automatic • Petrol</p><div class="price">GH₵5,000 <a class="view-details" href="vehicle-testtop.html">View Details</a></div></div>
-      </article>
-    </div>
+    <article class="vehicle-card">
+      <div class="vehicle-img"><span class="tag">New Arrival</span><div class="car-placeholder">HYUNDAI<br><small>TUCSON</small></div></div>
+      <div class="vehicle-info"><h3>Hyundai Tucson</h3><p>2022 • Automatic • Petrol</p><div class="price">GH₵29,800 <a class="view-details" href="vehicle-hyundai-tucson.html">View Details</a></div></div>
+    </article>
+  </div>
 </section>
 
 
@@ -86,7 +95,7 @@
 <!-- 'How', 'About', and 'Contact' moved to separate pages -->
 </main>
 
-<footer><div class="container footer"><div class="brand"><span class="brand-mark">KA</span><span>Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></div><p>© 2026 Kingdom AutoMobile Dealership. All rights reserved.</p></div></footer>
+<footer><div class="container footer"><div class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">Kingdom <b>AutoMobile</b><small>DEALERSHIP</small></span></div><p>© 2026 Kingdom AutoMobile Dealership. All rights reserved.</p></div></footer>
 <script>
 (function(){
   const menuBtn = document.querySelector('.menu-btn');
